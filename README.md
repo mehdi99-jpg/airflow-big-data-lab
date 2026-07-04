@@ -82,16 +82,22 @@ Quatre pipelines ont été intégrés et exécutés avec succès dans l'environn
 ### 1. Mon Premier DAG (`mon_premier_dag.py`)
 * **But :** Découverte de la syntaxe d'Airflow.
 * **Fonctionnement :** Exécution séquentielle simple de 3 tâches (`debut` ➔ `traitement` ➔ `fin`) affichant des logs textes via `PythonOperator`.
+* **Graphe des dépendances :**
+  ![Graphe mon_premier_dag](./snapshots/mon-premier-dag-graph.png)
 
 ### 2. Pipeline Big Data Python (`pipeline_big_data_python.py`)
 * **But :** Simuler un flux ETL séquentiel de données de ventes.
 * **Fonctionnement :** 
   * Ingestion depuis une source simulée ➔ Stockage Brut ➔ Validation du Schéma ➔ Nettoyage/Calcul du montant ➔ Analyse (chiffre d'affaires par ville) ➔ Chargement final ➔ Génération du rapport de ventes.
+* **Graphe des dépendances :**
+  ![Graphe pipeline_big_data_python](./snapshots/pipeline-bigdata-python-graph.png)
 
 ### 3. Pipeline Big Data Parallèle (`pipeline_big_data_parallele.py`)
 * **But :** Démontrer l'importance et l'implémentation du traitement distribué/parallèle.
 * **Fonctionnement :** 
   * Après validation, le workflow se sépare en deux branches parallèles exécutées simultanément : calcul du chiffre d'affaires par ville et calcul par produit. Les résultats sont ensuite fusionnés dans un rapport final commun.
+* **Graphe des dépendances :**
+  ![Graphe pipeline_big_data_parallele](./snapshots/pipiline-big-data-parallel-graph.png)
 
 ### 4. Mini-Projet : Pipeline Inscription Étudiants (`pipeline_inscription_etudiants.py`)
 * **But :** Réalisation complète d'un pipeline d'inscription universitaire complexe.
@@ -104,10 +110,34 @@ Quatre pipelines ont été intégrés et exécutés avec succès dans l'environn
      * `affectation_groupes` : Répartit alternativement les étudiants dans le `Groupe_A` ou le `Groupe_B`.
      * `generation_statistiques` : Calcule les indicateurs clés (moyenne, note max, note min, taux de réussite).
   6. `rapport_final` : Génère le bilan final d'inscription au format texte.
+* **Graphe des dépendances :**
+  ![Graphe pipeline_inscription_etudiants](./snapshots/pipeline-inscription-edutiants-graph.png)
 
 ---
 
-## 6. Exécution des Pipelines
+## 6. Exécution et Analyse du Mini-Projet (Web UI)
+
+En plus de la vue Graph, l'interface Web d'Airflow permet d'auditer et d'analyser en détail l'exécution du mini-projet d'inscription :
+
+### Consultation du Code Source
+Il est possible de visualiser directement le script Python définissant le DAG depuis l'interface sans quitter le navigateur :
+![Code source dans l'interface Airflow](./snapshots/script-for-pipeline-inscriptions-etudiants-airflow-ui.png)
+
+### Diagramme de Gantt
+Le diagramme de Gantt affiche précisément l'ordonnancement temporel des tâches, confirmant que les tâches `affectation_groupes` et `generation_statistiques` s'exécutent en parallèle au même moment chronologique :
+![Gantt chart dans l'interface Airflow](./snapshots/pipeline-inscription-etudiants-gantt-airflow-ui.png)
+
+### Statistiques d'Exécution et Détails
+Le résumé d'exécution affiche la durée de chaque tâche et les paramètres associés :
+![Détails du pipeline](./snapshots/pipeline-inscription-edutiants-details-on-airflow-ui.png)
+
+### Logs d'Audit
+Les actions d'administration (comme le déclenchement manuel ou la modification de l'état) sont tracées dans les logs d'audit d'Airflow :
+![Logs d'audit sur l'interface Airflow](./snapshots/pipiline-insciprtion-edtudiants-audit-logs-on-airflow-web-ui.png)
+
+---
+
+## 7. Exécution Générale
 
 Tous les DAGs ont été activés et exécutés sans aucune erreur :
 
@@ -115,7 +145,7 @@ Tous les DAGs ont été activés et exécutés sans aucune erreur :
 
 ---
 
-## 7. Questions de Compréhension du Lab
+## 8. Questions de Compréhension du Lab
 
 ### Section 6.3 : Pipeline Séquentiel (Ventes)
 1. **Quelle est la première tâche exécutée ?**
@@ -143,7 +173,7 @@ Tous les DAGs ont été activés et exécutés sans aucune erreur :
 
 ---
 
-## 8. Données et Rapports Générés
+## 9. Données et Rapports Générés
 
 À la fin de l'exécution des DAGs, les résultats sont disponibles localement dans le dossier `./data/` :
 
