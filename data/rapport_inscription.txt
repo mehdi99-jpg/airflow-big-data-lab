@@ -1,0 +1,11 @@
+RAPPORT DES INSCRIPTIONS ETUDIANTS
+==================================
+
+Nombre d'etudiants inscrits : 6
+Note Moyenne : 12.42/20
+Note Maximale : 16.0/20 | Note Minimale : 8.5/20
+Taux de reussite : 66.7%
+
+Repartition des groupes :
+  - Groupe_A : Ali, Omar, Hamza
+  - Groupe_B : Sanaa, Yasmine, Layla
